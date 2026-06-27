@@ -11,7 +11,10 @@ This skill defines the workflow, style guide, and conventions for transforming a
 
 ```
 [input] -> extract source text --> paper-reader --> outliner --> writer --> editor --> output/<slug>.md
+                /tmp/paper-source.txt                                    /tmp/paper-draft.md  /tmp/paper-final.md
 ```
+
+All subagents that produce long markdown (writer, editor) write to a file rather than returning content in their response. Inline responses are unreliable for long markdown — empty or truncated responses lose the work. The orchestrator reads the final file from `/tmp/paper-final.md` and wraps it with YAML frontmatter.
 
 See `AGENTS.md` at the project root for the full architecture and source-extraction details.
 
