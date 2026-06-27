@@ -1,0 +1,10 @@
+# Generated articles
+output/
+
+# Temporary PDF/text extraction
+/tmp/paper.pdf
+/tmp/paper-source.txt
+
+# OS
+.DS_Store
+Thumbs.db
