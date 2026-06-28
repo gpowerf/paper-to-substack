@@ -56,4 +56,5 @@ For each of 5-8 sections:
 - Do not propose more than 8 sections.
 - Pull quotes must be verbatim from the source text.
 - Candidate titles must each be under 90 characters.
+- Do not use em dashes (—) in the hook or section descriptions. Use commas, colons, or parentheses.
 - Do not write prose. Bullets only.

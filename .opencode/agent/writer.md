@@ -35,6 +35,7 @@ A complete markdown article draft. No YAML frontmatter - the orchestrator adds t
 - Use analogies for technical concepts. Anchor abstract ideas in concrete images.
 - Vary sentence length. Short sentences for emphasis. Longer ones for explanation.
 - Never use "delve", "tapestry", "navigate the landscape", "in today's world", "it's worth noting", "at the end of the day", "let's dive in", "picture this".
+- Do NOT use em dashes (—) in prose. Use commas, colons, or parentheses instead. The only allowed em dash is the single `— ` before a pull-quote attribution.
 - Explain every piece of jargon on first use, in parentheses or a short clause.
 - Preserve every number, finding, and quote exactly as in the source. If unsure, omit.
 - Each section should flow into the next. No "In this section we will..." transitions.

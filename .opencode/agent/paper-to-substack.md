@@ -76,10 +76,10 @@ Pass the reader's summary AND the source text. Ask for a Substack-style outline 
 - Tone notes (2-3 bullets)
 
 ### c. writer
-Pass the outline, the reader's summary, AND the source text. Ask for a full draft in markdown. Substack style: conversational, accessible, uses analogies, preserves technical accuracy. No YAML frontmatter. Write the draft to `/tmp/paper-draft.md` (the editor reads from there).
+Pass the outline, the reader's summary, AND the source text. Ask for a full draft in markdown. Substack style: conversational, accessible, uses analogies, preserves technical accuracy. No em dashes in prose (use commas, colons, or parentheses instead; the only allowed em dash is the pull-quote attribution). No YAML frontmatter. Write the draft to `/tmp/paper-draft.md` (the editor reads from there).
 
 ### d. editor
-Write the draft to `/tmp/paper-draft.md` if the writer didn't already. Pass the orchestrator's draft path (`/tmp/paper-draft.md`) and the source text path (`/tmp/paper-source.txt`) to the editor. Tell it to write the final polished version to `/tmp/paper-final.md` using the Write tool — NOT to return the content in its response (inline responses are unreliable for long markdown). Ask it to refine the hook, tighten headings, suggest pull quotes as `> ` blockquotes, check facts against the source text, pick the best title, fix pacing. Note word count in an HTML comment at the top. After the editor confirms, read `/tmp/paper-final.md` to get the final article.
+Write the draft to `/tmp/paper-draft.md` if the writer didn't already. Pass the orchestrator's draft path (`/tmp/paper-draft.md`) and the source text path (`/tmp/paper-source.txt`) to the editor. Tell it to write the final polished version to `/tmp/paper-final.md` using the Write tool — NOT to return the content in its response (inline responses are unreliable for long markdown). Ask it to refine the hook, tighten headings, suggest pull quotes as `> ` blockquotes, check facts against the source text, pick the best title, fix pacing, and remove all em dashes from prose. Note word count in an HTML comment at the top. After the editor confirms, read `/tmp/paper-final.md` to get the final article.
 
 ## 6. Write the output
 

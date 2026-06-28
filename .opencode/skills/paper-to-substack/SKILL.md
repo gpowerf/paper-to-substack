@@ -44,7 +44,7 @@ See `AGENTS.md` at the project root for the full architecture and source-extract
 ## Jargon
 
 - Gloss every technical term on first use.
-- Format: "term (plain-language gloss)" or "term — plain-language gloss".
+- Format: "term (plain-language gloss)" or "term: plain-language gloss".
 - Don't over-explain common technical terms (API, dataset, model).
 
 ## Analogies
@@ -52,6 +52,15 @@ See `AGENTS.md` at the project root for the full architecture and source-extract
 - Use 1-2 analogies per article for the most abstract concepts.
 - Anchor analogies in concrete, everyday images.
 - Don't mix metaphors.
+
+## Punctuation
+
+- Do NOT use em dashes (—) in prose. Readers dislike them and they read as a stylistic tic.
+- Use commas, colons, or parentheses instead:
+  - Appositive or aside → commas or parentheses ("The model, trained on web text, fails on...").
+  - Emphasis or pause → a period and a short sentence, or a colon.
+  - Definition or elaboration → a colon ("the metric: how often the model hallucinates").
+- The ONLY allowed em dash is the single `— ` that prefixes a pull-quote attribution (standard journalistic convention).
 
 ## Length
 
@@ -112,6 +121,7 @@ Before the orchestrator writes the final file, confirm:
 - [ ] Every jargon term is glossed on first use.
 - [ ] Pull quotes are verbatim and attributed.
 - [ ] No banned phrases remain.
+- [ ] No em dashes in prose (only the pull-quote attribution em dash is allowed).
 - [ ] No fabricated numbers, quotes, or findings.
 - [ ] Word count is 1200-2500.
 - [ ] Frontmatter is present and complete.
