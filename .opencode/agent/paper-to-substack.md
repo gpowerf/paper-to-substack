@@ -34,25 +34,45 @@ If neither works, install one. Try `sudo apt-get install -y poppler-utils` first
 1. Normalize: if given a bare ID like `2401.00001`, use `https://arxiv.org/abs/<id>`. Strip any version suffix (e.g. `2401.00001v2` -> `2401.00001`) for the PDF URL.
 2. Fetch metadata via the arXiv API (structured XML, more reliable than scraping HTML): `curl -sL "https://export.arxiv.org/api/query?id_list=<id>"`. Extract title and authors from the `<title>` and `<author><name>` tags.
 3. Download the PDF: `curl -sL -o /tmp/paper.pdf "https://arxiv.org/pdf/<id>.pdf"`.
-4. Convert to text: `pdftotext /tmp/paper.pdf -` (or pymupdf fallback).
+4. Convert to text and write DIRECTLY to the source file (do not capture in the conversation): `pdftotext /tmp/paper.pdf > /tmp/paper-source.txt` (or pymupdf fallback redirected to the file: `python3 -c "import fitz; ..." "<pdf_path>" > /tmp/paper-source.txt`).
 
 ### For local PDF
 1. Verify the file exists: `ls -la "<path>"`.
-2. Convert: `pdftotext "<path>" -` (or pymupdf fallback).
+2. Convert and write DIRECTLY to the source file: `pdftotext "<path>" > /tmp/paper-source.txt` (or pymupdf fallback redirected to the file).
 
 ### For raw text
-- Pass through directly. Use the pasted content as the source.
+- Write the pasted content to `/tmp/paper-source.txt` using a bash heredoc (NOT the Write tool). The Write tool times out on large payloads (504 upstream idle timeout); bash heredocs do not. If the content is large (over ~20KB), split it across multiple `cat >>` appends. Example:
+
+```bash
+cat > /tmp/paper-source.txt <<'CHUNK_EOF'
+<first chunk of pasted text>
+CHUNK_EOF
+cat >> /tmp/paper-source.txt <<'CHUNK_EOF'
+
+<next chunk of pasted text>
+CHUNK_EOF
+```
+
+Use `'CHUNK_EOF'` (quoted) so the heredoc does not interpret backticks, dollar signs, or other shell metacharacters in the paper text.
 
 ## 4. Save and trim the source text
 
-Write the extracted text to `/tmp/paper-source.txt`. If over 100k characters, keep the abstract, intro, methods, results, and conclusion; trim middle sections. Preserve the bibliography only if the article needs to reference specific prior work.
+By this point the source text is already written to `/tmp/paper-source.txt` by the extraction step above. Verify it landed: `wc -c /tmp/paper-source.txt` and `wc -w /tmp/paper-source.txt`.
+
+If over 100k characters, trim in place with bash (do not re-write via the Write tool). Keep the abstract, intro, methods, results, and conclusion; trim middle sections. Preserve the bibliography only if the article needs to reference specific prior work.
 
 ## 5. Run the pipeline
 
-Delegate to each subagent in sequence using the Task tool. Pass forward the accumulated context. Wait for each to finish before starting the next.
+**File-based handoffs are mandatory.** Every subagent reads its inputs from files and writes its output to a file. Pass file PATHS to subagents, never inline content. Large inline payloads cause 504 upstream idle timeouts on the Task and Write tools; file-based handoffs avoid this entirely. The intermediate files form a chain:
+
+```
+/tmp/paper-source.txt -> /tmp/paper-reader-output.md -> /tmp/paper-outline.md -> /tmp/paper-draft.md -> /tmp/paper-final.md
+```
+
+Delegate to each subagent in sequence using the Task tool. Wait for each to finish before starting the next.
 
 ### a. paper-reader
-Pass the source text (from `/tmp/paper-source.txt`). Ask for a structured summary in this exact markdown shape:
+Tell the subagent to READ `/tmp/paper-source.txt` with the Read tool and WRITE its structured summary to `/tmp/paper-reader-output.md` using the Write tool (NOT to return the content in its response). Ask for a structured summary in this exact markdown shape:
 
 ```
 ## Title
@@ -67,7 +87,7 @@ Pass the source text (from `/tmp/paper-source.txt`). Ask for a structured summar
 ```
 
 ### b. outliner
-Pass the reader's summary AND the source text. Ask for a Substack-style outline with:
+Tell the subagent to READ `/tmp/paper-reader-output.md` AND `/tmp/paper-source.txt` with the Read tool, and WRITE its outline to `/tmp/paper-outline.md` using the Write tool (NOT to return the content in its response). Ask for a Substack-style outline with:
 - 3 candidate titles (one analytical, one provocative, one plain)
 - A 2-3 sentence hook
 - Section headings (5-8), each with 3-5 bullets describing content
@@ -76,27 +96,44 @@ Pass the reader's summary AND the source text. Ask for a Substack-style outline 
 - Tone notes (2-3 bullets)
 
 ### c. writer
-Pass the outline and the reader's summary inline, AND pass the source text path (`/tmp/paper-source.txt`). Tell the writer to read the source with the Read tool, then WRITE a full draft to `/tmp/paper-draft.md` using the Write tool — NOT to return the content in its response (inline responses are unreliable for long markdown). Substack style: conversational, accessible, uses analogies, preserves technical accuracy. No em dashes in prose (use commas, colons, or parentheses instead; the only allowed em dash is the pull-quote attribution). No YAML frontmatter. After the writer confirms, proceed to the editor.
+Tell the writer to READ the outline from `/tmp/paper-outline.md`, the reader's summary from `/tmp/paper-reader-output.md`, and the source text from `/tmp/paper-source.txt` (all via the Read tool), then WRITE a full draft to `/tmp/paper-draft.md` using the Write tool — NOT to return the content in its response (inline responses are unreliable for long markdown). Substack style: conversational, accessible, uses analogies, preserves technical accuracy. No em dashes in prose (use commas, colons, or parentheses instead; the only allowed em dash is the pull-quote attribution). No YAML frontmatter. After the writer confirms, proceed to the editor.
 
 ### d. editor
-The writer writes directly to `/tmp/paper-draft.md`. Pass that draft path (`/tmp/paper-draft.md`) and the source text path (`/tmp/paper-source.txt`) to the editor. Tell it to write the final polished version to `/tmp/paper-final.md` using the Write tool — NOT to return the content in its response (inline responses are unreliable for long markdown). Ask it to refine the hook, tighten headings, suggest pull quotes as `> ` blockquotes, check facts against the source text, pick the best title, fix pacing, and remove all em dashes from prose. Note word count in an HTML comment at the top. After the editor confirms, read `/tmp/paper-final.md` to get the final article.
+Tell the editor to READ `/tmp/paper-draft.md` and `/tmp/paper-source.txt` with the Read tool, and WRITE the final polished version to `/tmp/paper-final.md` using the Write tool — NOT to return the content in its response (inline responses are unreliable for long markdown). Ask it to refine the hook, tighten headings, suggest pull quotes as `> ` blockquotes, check facts against the source text, pick the best title, fix pacing, and remove all em dashes from prose. Note word count in an HTML comment at the top. After the editor confirms, read `/tmp/paper-final.md` to get the final article (use the Read tool to verify the chosen title and word count).
 
 ## 6. Write the output
 
 1. Derive a kebab-case slug from the paper title (lowercase, hyphens, max 8 words). Remove articles (a, an, the) and common prepositions/conjunctions (of, in, on, for, to, with, and) but keep meaningful short words. Example: "Attention Is All You Need" -> `attention-is-all-you-need`.
 2. Ensure `output/` exists: `mkdir -p output`.
-3. Write the final markdown to `output/<slug>.md`. The file must start with YAML frontmatter:
+3. Assemble the final file by concatenating the YAML frontmatter with the final article using bash (NOT the Write tool, which would re-transmit the full article content and risk a 504 timeout). Write the small frontmatter to a temp file via heredoc, then `cat` it together with `/tmp/paper-final.md`:
 
-```yaml
+```bash
+mkdir -p output
+cat > /tmp/frontmatter.txt <<'FM_EOF'
 ---
 title: "Chosen Title"
 source: "<arxiv-url | pdf-path | pasted>"
 authors: ["...", "..."]
 date: YYYY-MM-DD
 ---
+
+FM_EOF
+cat /tmp/frontmatter.txt /tmp/paper-final.md > output/<slug>.md
 ```
 
+Fill in the real title, source, authors, and date in the heredoc before running. Use the chosen title from the editor's HTML comment in `/tmp/paper-final.md`, the authors from the arXiv metadata or paper header, and today's date.
+
 4. Report back to the user: the output path, the chosen title, word count, and a 2-sentence summary of the article.
+
+## 7. Clean up
+
+After the final output is written and verified, remove the intermediate files in `/tmp/`:
+
+```bash
+rm -f /tmp/paper-source.txt /tmp/paper-reader-output.md /tmp/paper-outline.md /tmp/paper-draft.md /tmp/paper-final.md /tmp/frontmatter.txt
+```
+
+This keeps the workspace tidy and avoids leaving paper source text on disk.
 
 # Communication
 

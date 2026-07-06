@@ -10,11 +10,17 @@ This skill defines the workflow, style guide, and conventions for transforming a
 # Pipeline
 
 ```
-[input] -> extract source text --> paper-reader --> outliner --> writer --> editor --> output/<slug>.md
-                /tmp/paper-source.txt                                    /tmp/paper-draft.md  /tmp/paper-final.md
+[input] -> extract source text -> paper-reader -> outliner -> writer -> editor -> output/<slug>.md
+            /tmp/paper-source.txt   /tmp/paper-reader-output.md  /tmp/paper-outline.md  /tmp/paper-draft.md  /tmp/paper-final.md
 ```
 
-All subagents that produce long markdown (writer, editor) write to a file rather than returning content in their response. Inline responses are unreliable for long markdown — empty or truncated responses lose the work. The orchestrator reads the final file from `/tmp/paper-final.md` and wraps it with YAML frontmatter.
+**File-based handoffs are mandatory at every stage.** Every subagent reads its inputs from files and writes its output to a file. The orchestrator passes file PATHS to subagents, never inline content. Large inline payloads cause 504 upstream idle timeouts on the Task and Write tools; file-based handoffs avoid this entirely.
+
+Similarly, the orchestrator writes the source text via bash (heredoc for pasted text, stdout-redirect for `pdftotext`/`pymupdf`), NOT the Write tool, because the Write tool times out on large payloads. For very large pasted text (over ~20KB), split the heredoc across multiple `cat >>` appends. The final output file is assembled with `cat` (frontmatter + `/tmp/paper-final.md`), not re-transmitted through the Write tool.
+
+The orchestrator cleans up the `/tmp/` intermediate files after writing the final output.
+
+All subagents that produce long markdown (reader, outliner, writer, editor) write to a file rather than returning content in their response. Inline responses are unreliable for long markdown — empty or truncated responses lose the work, and large payloads cause upstream timeouts. The orchestrator reads the final file from `/tmp/paper-final.md` and wraps it with YAML frontmatter via bash concatenation.
 
 See `AGENTS.md` at the project root for the full architecture and source-extraction details.
 

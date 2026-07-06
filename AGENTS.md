@@ -10,6 +10,7 @@ The framework is a multi-agent pipeline orchestrated by a single primary agent:
 
 ```
 [input] -> extract source text -> paper-reader -> outliner -> writer -> editor -> output/<slug>.md
+            /tmp/paper-source.txt   /tmp/paper-reader-output.md  /tmp/paper-outline.md  /tmp/paper-draft.md  /tmp/paper-final.md
 ```
 
 - **paper-to-substack** (primary, default agent): orchestrates the pipeline. Accepts an arXiv URL/ID, a local PDF path, or raw pasted text. Extracts source text, delegates to specialized subagents, writes the final markdown.
@@ -19,6 +20,21 @@ The framework is a multi-agent pipeline orchestrated by a single primary agent:
 - **editor** (subagent): refines hooks, headings, title, pacing, flow. Suggests pull quotes. Returns final markdown.
 
 See `.opencode/agent/` for the full prompts of each agent.
+
+## File-based handoffs
+
+Every stage of the pipeline communicates via files in `/tmp/`, not inline content. The orchestrator passes file paths to each subagent, and each subagent reads its inputs with the Read tool and writes its output to a file with the Write tool. This is mandatory: large inline payloads cause 504 upstream idle timeouts on the Task and Write tools, and inline responses are unreliable for long markdown (empty or truncated responses lose the work).
+
+The intermediate files form a chain:
+
+| Stage      | Reads from                                              | Writes to                 |
+| ---------- | ------------------------------------------------------- | ------------------------- |
+| paper-reader | `/tmp/paper-source.txt`                               | `/tmp/paper-reader-output.md` |
+| outliner   | `/tmp/paper-reader-output.md`, `/tmp/paper-source.txt`  | `/tmp/paper-outline.md`   |
+| writer     | `/tmp/paper-outline.md`, `/tmp/paper-reader-output.md`, `/tmp/paper-source.txt` | `/tmp/paper-draft.md` |
+| editor     | `/tmp/paper-draft.md`, `/tmp/paper-source.txt`          | `/tmp/paper-final.md`     |
+
+The orchestrator writes the source text via bash (heredoc for pasted text, stdout-redirect for `pdftotext`/`pymupdf`), NOT the Write tool, because the Write tool times out on large payloads. For very large pasted text (over ~20KB), the heredoc is split across multiple `cat >>` appends. The final output file is assembled with `cat` (frontmatter + `/tmp/paper-final.md`), not re-transmitted through the Write tool. The orchestrator cleans up the `/tmp/` intermediate files after writing the final output.
 
 ## Output
 
@@ -37,11 +53,11 @@ date: YYYY-MM-DD
 
 ## Source text extraction
 
-The orchestrator extracts source text from the input before handing it to the paper-reader.
+The orchestrator extracts source text from the input before handing it to the paper-reader. All extraction writes DIRECTLY to `/tmp/paper-source.txt` via bash (stdout-redirect for `pdftotext`/`pymupdf`, heredoc for pasted text), NOT the Write tool, which times out on large payloads.
 
-- **arXiv URL/ID**: fetch metadata via the arXiv API (`https://export.arxiv.org/api/query?id_list=<id>`), then download the PDF and convert to text with `pdftotext` (fallback: `python3 -c "import fitz; ..."` if pymupdf is installed).
-- **Local PDF**: run `pdftotext <path> -` (or pymupdf fallback).
-- **Raw text**: pass through directly.
+- **arXiv URL/ID**: fetch metadata via the arXiv API (`https://export.arxiv.org/api/query?id_list=<id>`), then download the PDF and convert to text with `pdftotext > /tmp/paper-source.txt` (fallback: `python3 -c "import fitz; ..." > /tmp/paper-source.txt` if pymupdf is installed).
+- **Local PDF**: run `pdftotext <path> > /tmp/paper-source.txt` (or pymupdf fallback redirected to the file).
+- **Raw text**: write via bash heredoc to `/tmp/paper-source.txt`. For large pasted text (over ~20KB), split across multiple `cat >>` appends.
 
 Verify `pdftotext` is available with `command -v pdftotext`. If missing, install via `sudo apt-get install -y poppler-utils` OR fall back to `python3 -m pip install --user pymupdf` and use the fitz script below. Ask permission before installing anything.
 

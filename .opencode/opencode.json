@@ -1,4 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "default_agent": "paper-to-substack"
+  "default_agent": "paper-to-substack",
+  "provider": {
+    "openrouter": {
+      "options": {
+        "timeout": 600000
+      }
+    }
+  }
 }
