@@ -28,7 +28,7 @@ See `AGENTS.md` at the project root for the full architecture and source-extract
 
 ## Voice
 
-- Conversational but precise. Imagine explaining to a smart friend who isn't in your field.
+- Conversational but precise. The reader is tech-interested: they follow AI, use the tools, but don't have a CS degree or engineering background. Explain to them, not to a peer, not to a child.
 - The author is a knowledgeable guide, not a lecturer.
 - Avoid academic hedges ("it could be argued that...").
 - Avoid blog clichés ("In today's fast-paced world...").
@@ -49,15 +49,24 @@ See `AGENTS.md` at the project root for the full architecture and source-extract
 
 ## Jargon
 
-- Gloss every technical term on first use.
+- Gloss every technical term on first use, including terms that feel common (model, dataset, training, inference, API, commit). Assume curiosity, not background.
 - Format: "term (plain-language gloss)" or "term: plain-language gloss".
-- Don't over-explain common technical terms (API, dataset, model).
 
 ## Analogies
 
-- Use 1-2 analogies per article for the most abstract concepts.
+- Use 2-4 analogies per article for the most abstract concepts.
 - Anchor analogies in concrete, everyday images.
 - Don't mix metaphors.
+
+## Math handling
+
+The reader is tech-interested, not a researcher. They want to know what the math *means*, not see the math itself.
+
+- **Remove** all equations, formulas, theorems, proofs, and formal notation (e.g. `A(θ) + α·C(θ) = κ`, `Θ(2^(n²))`, `S = (C, D, E)`). Replace each with a plain-language statement of what it implies.
+- **Keep** practitioner-scale numbers: effect sizes, percentages, speedups, big-O in passing prose (e.g. "doubles faster than you can count"). These communicate scale without being formal notation.
+- **If a concept needs the math to be understood**, use an analogy instead. The analogy carries the meaning; the equation would only alienate.
+- **Never reproduce a formula and then restate it in English.** Pick one: the English version. The formula is for the source paper, not the article.
+- **Close the article with a single line** after the takeaway pointing readers to the original paper for full derivations and formal results.
 
 ## Punctuation
 
@@ -125,6 +134,8 @@ Before the orchestrator writes the final file, confirm:
 - [ ] Hook is 2-3 sentences, no rhetorical question.
 - [ ] Every section heading promises value (no label topics).
 - [ ] Every jargon term is glossed on first use.
+- [ ] No equations, derivations, or formal notation (practitioner numbers OK).
+- [ ] Closing line points to the source paper for derivations.
 - [ ] Pull quotes are verbatim and attributed.
 - [ ] No banned phrases remain.
 - [ ] No em dashes in prose (only the pull-quote attribution em dash is allowed).

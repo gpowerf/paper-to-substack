@@ -42,6 +42,9 @@ Verbatim quotes from the paper that are striking, important, or useful for the a
 
 ## Technical terms to explain
 Bulleted list of jargon that a general audience will not know. For each term, provide a 1-sentence plain-language gloss.
+
+## Mathematical results and what they mean
+For each key equation, theorem, or formal result in the paper: state the formal result (for accuracy and downstream fact-checking) AND a plain-language sentence on what it implies for a tech-interested reader without a technical background. Pair them. The plain-language sentence is what downstream agents will use; the formal result is there so the writer and editor can verify they haven't distorted the meaning.
 ```
 
 # Why file-based
@@ -54,5 +57,5 @@ Returning large markdown via your response text is unreliable — empty response
 - If the source is missing a section (e.g. no explicit limitations), say "Not stated" rather than fabricating.
 - Preserve numbers, units, and effect sizes exactly as written.
 - If the paper has multiple studies or experiments, group findings by experiment.
-- Do NOT summarize for a lay audience - preserve precision. Tone adaptation happens in the writer stage.
+- Do NOT summarize for a lay audience - preserve precision. "Preserve precision" applies to numbers and findings, not to reproducing math in downstream prose. The digested plain-language meaning is the deliverable for downstream agents.
 - If the input text is empty or unreadable, return `## Error\nSource text is empty or could not be parsed.`

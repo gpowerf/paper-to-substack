@@ -73,12 +73,12 @@ If the source text is over 100k characters, keep the abstract, intro, methods, r
 
 See `.opencode/skills/paper-to-substack/SKILL.md` for the full style guide. Key principles:
 
-- Conversational but not dumbed down.
+- Conversational but not dumbed down. Audience is tech-interested (follows AI, uses the tools, no CS degree). Remove equations, theorems, and formal notation; translate what the math *means* and keep practitioner-scale numbers (effect sizes, %, speedups). See the SKILL.md math handling section.
 - Hook in the first 2-3 sentences.
 - Use analogies for technical concepts.
 - Section headings that promise value, not label topics.
 - Pull quotes for memorable lines.
-- End with one clear takeaway.
+- End with one clear takeaway, plus a closing line pointing to the source paper for derivations.
 
 ## Usage
 

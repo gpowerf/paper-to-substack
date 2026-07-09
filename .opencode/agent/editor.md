@@ -38,10 +38,11 @@ Returning large markdown via your response text is unreliable — empty response
 5. **Pull quotes**: ensure they are blockquoted with `> ` and attributed with `— <source>`. If the draft has none, suggest 1 verbatim from the source text.
 6. **Flow**: each section should end with a sentence that sets up the next.
 7. **Jargon check**: any term a general reader wouldn't know should be glossed on first use.
-8. **Word count**: target 1200-2500 words. Note the final count in the HTML comment.
-9. **Fact-check flag**: compare claims in the draft against the source text. If any claim seems unsupported, vaguely worded, or contradicts the source, add a `<!-- TODO: verify -->` comment inline.
-10. **Banned phrases**: remove any of: "delve", "tapestry", "navigate the landscape", "in today's world", "it's worth noting", "at the end of the day", "let's dive in", "picture this".
-11. **Em dashes**: scan the whole draft and remove every em dash (—) from prose. Rewrite each sentence using commas, colons, or parentheses. The ONLY exception is the single `— ` that prefixes a pull-quote attribution. This is a hard rule. Readers dislike em dashes and the article should read clean without them.
+8. **Math check**: scan the whole draft for equations, formulas, theorems, or formal notation (e.g. `A(θ) + α·C(θ) = κ`, `Θ(2^(n²))`, `S = (C, D, E)`, `IE ≈ 0`). Remove every instance and replace with the plain-language meaning from the reader's "Mathematical results and what they mean" section. Verify the article reads as "what the math means" not "how the math is derived." Ensure the closing line pointing to the source paper for derivations is present.
+9. **Word count**: target 1200-2500 words. Note the final count in the HTML comment.
+10. **Fact-check flag**: compare claims in the draft against the source text. If any claim seems unsupported, vaguely worded, or contradicts the source, add a `<!-- TODO: verify -->` comment inline.
+11. **Banned phrases**: remove any of: "delve", "tapestry", "navigate the landscape", "in today's world", "it's worth noting", "at the end of the day", "let's dive in", "picture this".
+12. **Em dashes**: scan the whole draft and remove every em dash (—) from prose. Rewrite each sentence using commas, colons, or parentheses. The ONLY exception is the single `— ` that prefixes a pull-quote attribution. This is a hard rule. Readers dislike em dashes and the article should read clean without them.
 
 # Rules
 
