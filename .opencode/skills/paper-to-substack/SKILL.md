@@ -24,6 +24,64 @@ All subagents that produce long markdown (reader, outliner, writer, editor) writ
 
 See `AGENTS.md` at the project root for the full architecture and source-extraction details.
 
+# idea-to-substack pipeline
+
+A second primary agent, `idea-to-substack`, generates a Substack-style article from a structured article idea or outline (no source paper). It reuses the writer and editor subagents in a generalized "idea mode" and adds two new subagents:
+
+```
+[structured idea/outline] -> /tmp/idea-input.txt -> idea-planner -> [idea-researcher] -> writer -> editor -> output/<slug>.md
+                                                 /tmp/paper-outline.md   /tmp/idea-research-notes.md  /tmp/paper-draft.md  /tmp/paper-final.md
+```
+
+- **idea-to-substack** (primary agent): orchestrates the idea pipeline. Accepts a structured idea/outline (file path, pasted text, or loosely-structured idea). Writes to `/tmp/idea-input.txt`, delegates to subagents, writes the final markdown.
+- **idea-planner** (subagent): normalizes the user's outline into the exact Substack outline format the writer expects (candidate titles, hook, 5-8 section bullets, tone notes, pull-quote plan), and flags gaps that would benefit from supporting research in a `## Research needed?` section. Writes to `/tmp/paper-outline.md` (same path the outliner uses, so writer/editor need no path changes).
+- **idea-researcher** (subagent, optional): runs only when the planner flags gaps AND the user opts in. Fetches supporting links/facts via webfetch and writes notes to `/tmp/idea-research-notes.md` for the writer/editor to ground claims.
+- **writer** / **editor** (generalized): run in "idea mode" when no source paper path is provided. They relax source-fidelity rules (no "preserve numbers exactly from source", no "only source quotes", no equations removal, no "point to source paper" closing line) while keeping all style + no-fabrication rules. See the writer and editor agent prompts for the mode-specific instructions.
+
+The research step is optional. The orchestrator asks the user ONCE before spawning the researcher (web fetches are a side effect and "optional" means per-run consent). If skipped, the writer runs purely from the planner's outline.
+
+File-based handoffs, `/tmp/` cleanup, slug derivation, and frontmatter assembly are identical to the paper pipeline. The Substack style guide below applies to BOTH modes.
+
+## Idea-input schema (flexible)
+
+The planner accepts anything reasonable, but the user is encouraged to provide:
+
+```markdown
+# <Working title or topic>
+
+## Audience
+<who this is for, e.g. "engineers new to k8s", "PMs curious about AI">
+
+## Angle / Thesis
+<1-2 sentences: the core argument or insight>
+
+## Key points
+- <point 1>
+- <point 2>
+
+## Tone
+<e.g. "curious and practical", "wry", "urgent">
+
+## Sources (optional)
+- <url or note>
+
+## Notes
+<length target, things to avoid, specific examples to include>
+```
+
+## Frontmatter for idea-driven articles
+
+```yaml
+---
+title: "Chosen Title"
+source: "idea"
+authors: []
+date: YYYY-MM-DD
+---
+```
+
+`authors: []` is kept for schema consistency with paper outputs.
+
 # Substack style guide
 
 ## Voice
