@@ -94,6 +94,7 @@ date: YYYY-MM-DD
 ## Structure
 
 - **Hook** (2-3 sentences): pulls the reader in, hints at the finding.
+- **Source attribution** (in the intro, for articles based on a source paper): name the paper's full title and lead author on first mention so readers can find the original. Keep it natural, woven into a sentence, not a formal citation. Example shape: "A recent paper, Jane Smith and colleagues' 'Paper Title,' ..." This only applies to the paper-to-substack pipeline; idea-driven articles have no source paper to name.
 - **Body** (5-8 sections): each with a heading that promises value.
 - **Pull quotes** (1-2): verbatim from the paper, blockquoted and attributed.
 - **Closing takeaway** (1-2 sentences): the single thing to remember.
@@ -190,6 +191,7 @@ Before the orchestrator writes the final file, confirm:
 
 - [ ] Title is from the candidate titles list (or one alternative proposed by editor).
 - [ ] Hook is 2-3 sentences, no rhetorical question.
+- [ ] Source paper's full title and lead author are named in the intro (paper-to-substack pipeline only).
 - [ ] Every section heading promises value (no label topics).
 - [ ] Every jargon term is glossed on first use.
 - [ ] No equations, derivations, or formal notation (practitioner numbers OK).
