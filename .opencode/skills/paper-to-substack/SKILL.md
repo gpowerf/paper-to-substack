@@ -87,7 +87,9 @@ date: YYYY-MM-DD
 ## Voice
 
 - Conversational but precise. The reader is tech-interested: they follow AI, use the tools, but don't have a CS degree or engineering background. Explain to them, not to a peer, not to a child.
-- The author is a knowledgeable guide, not a lecturer.
+- The author is a real person with opinions, not a neutral summarizer. Allow first-person sparingly where it adds candor or signals personal judgment.
+- Not every paragraph needs a textbook structure (topic, evidence, transition). A one-sentence paragraph for emphasis is fine. Uneven paragraph lengths read as human.
+- Occasional informal constructions are natural: starting sentences with "And," "But," or "So," using parenthetical asides, brief self-interruption. Keep these but don't force them.
 - Avoid academic hedges ("it could be argued that...").
 - Avoid blog clichés ("In today's fast-paced world...").
 
