@@ -145,7 +145,7 @@ The reader is tech-interested, not a researcher. They want to know what the math
 
 ## Forbidden phrases
 
-- "delve", "tapestry", "navigate the landscape"
+- "delve", "tapestry", "navigate the landscape", "quietly"
 - "in today's world", "it's worth noting"
 - "At the end of the day"
 - "Let's dive in"
