@@ -180,3 +180,4 @@ The `/idea-to-substack` command targets the `idea-to-substack` agent. If the pla
 - `.opencode/command/paper-to-substack.md` - the `/paper-to-substack` command.
 - `.opencode/command/idea-to-substack.md` - the `/idea-to-substack` command.
 - `.opencode/skills/paper-to-substack/SKILL.md` - style guide and workflow (shared by both pipelines).
+- `.opencode/skills/substack-headline/SKILL.md` - headline framework for post titles (3-question test, 10 formats, A/B testing and SEO-title notes). Used by the outliner (candidate titles) and editor (final title check).

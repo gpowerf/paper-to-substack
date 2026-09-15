@@ -19,9 +19,7 @@ The outline must have EXACTLY these sections:
 
 ```
 ## Candidate titles
-1. (analytical - clearly states the finding)
-2. (provocative - hooks curiosity without clickbait)
-3. (plain - simple and direct)
+3 titles in 3 DIFFERENT headline formats from the substack-headline skill. Read the skill first: `.opencode/skills/substack-headline/SKILL.md`. Tag each candidate with its format(s) and make sure each passes the 3-question test (what the piece is about / who it's for / the promise). A good spread is usually one number-or-finding format, one contradiction, one call-out to the exact reader, but pick whichever formats fit the paper best.
 
 ## Hook
 2-3 sentences that pull the reader in. Must hint at the paper's core finding without spoiling it entirely. No rhetorical questions.
@@ -65,5 +63,6 @@ Returning large markdown via your response text is unreliable — empty response
 - Do not propose more than 8 sections.
 - Pull quotes must be verbatim from the source text.
 - Candidate titles must each be under 90 characters.
+- Each candidate title must answer at least 2 of the 3 headline questions (what / who / promise); the strongest answer all 3.
 - Do not use em dashes (—) in the hook or section descriptions. Use commas, colons, or parentheses.
 - Do not write prose. Bullets only.

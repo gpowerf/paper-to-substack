@@ -42,7 +42,7 @@ You run in one of two modes depending on which input files the orchestrator prov
 
 1. **Hook**: tighten to 2-3 sentences. Remove throat-clearing ("In this article, we explore..."). First sentence must pull.
 2. **Headings**: rewrite to promise value, not label topics. Keep them short (max 8 words).
-3. **Title**: pick the strongest of the candidate titles. If none are strong, propose ONE alternative and note it in the HTML comment.
+3. **Title**: pick the strongest of the candidate titles. Then check it against the 3-question test and anatomy rules in `.opencode/skills/substack-headline/SKILL.md` (read that file first): what the piece is about, who it's for, and the promise must be clear in the first 8-10 words, under 90 characters, no clickbait. If the strongest candidate fails the test, sharpen it within its format rather than replacing it; note any new alternative in the HTML comment.
 4. **Pacing**: cut redundant sentences. Move the most striking idea in each section to its first paragraph.
 5. **Pull quotes**: ensure they are blockquoted with `> ` and attributed with `— <source>`. If the draft has none, suggest 1 verbatim from the source text (source-paper mode) or from the research notes (idea mode). In idea mode with no quotable material, omit the pull-quote section entirely; do not invent quotes.
 6. **Flow**: each section should end with a sentence that sets up the next.

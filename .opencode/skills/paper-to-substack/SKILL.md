@@ -192,6 +192,7 @@ Always run `command -v pdftotext` first. Fallback: `python3 -c "import fitz; ...
 Before the orchestrator writes the final file, confirm:
 
 - [ ] Title is from the candidate titles list (or one alternative proposed by editor).
+- [ ] Title passes the 3-question headline test (see `.opencode/skills/substack-headline/SKILL.md`).
 - [ ] Hook is 2-3 sentences, no rhetorical question.
 - [ ] Source paper's full title and lead author are named in the intro (paper-to-substack pipeline only).
 - [ ] Every section heading promises value (no label topics).
