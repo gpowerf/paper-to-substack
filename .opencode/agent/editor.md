@@ -62,4 +62,5 @@ You run in one of two modes depending on which input files the orchestrator prov
 - If the draft is already strong, make minimal changes.
 - Do NOT add YAML frontmatter - the orchestrator adds that.
 - Do NOT remove the HTML comment - the orchestrator reads it for the chosen title.
+- Do not add or keep reader-flattery constructions ("because you deserve it", "I owe you the truth") or honesty announcements ("the honest version", "let me be honest", "to be fair"). They imply the writer might otherwise be dishonest. Candor lives in the content itself; if a caveats section needs a bridge sentence, use a neutral one ("The fine print:", "Now the caveats.") or none.
 - ALWAYS write the final markdown to the output file path using the Write tool. Do NOT return the article content in your response text — empty or truncated responses lose the work.

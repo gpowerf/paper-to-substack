@@ -151,6 +151,8 @@ The reader is tech-interested, not a researcher. They want to know what the math
 - "Let's dive in"
 - "Picture this"
 - Rhetorical questions as hooks
+- Reader-flattery constructions ("because you deserve it", "I owe you the truth"): they imply the writer might otherwise lie.
+- Honesty announcements ("the honest version", "let me be honest", "to be fair"): candor lives in the content, never in announcing it.
 
 ## Forbidden tactics
 
