@@ -139,6 +139,7 @@ If the source text is over 100k characters, keep the abstract, intro, methods, r
 See `.opencode/skills/paper-to-substack/SKILL.md` for the full style guide. Key principles:
 
 - Conversational but not dumbed down. Audience is tech-interested (follows AI, uses the tools, no CS degree). Remove equations, theorems, and formal notation; translate what the math *means* and keep practitioner-scale numbers (effect sizes, %, speedups). See the SKILL.md math handling section.
+- Plain language: prefer everyday words over the paper's vocabulary ("people" not "agents", "hidden costs" not "externalities"); gloss jargon in the same sentence; no feeling-word labels on findings ("the bleakest result"); one metaphor per concept, cashed out in plain words; assume the reader has no statistics background. See the SKILL.md plain-language section.
 - Hook in the first 2-3 sentences.
 - Use analogies for technical concepts.
 - Section headings that promise value, not label topics.
@@ -181,3 +182,5 @@ The `/idea-to-substack` command targets the `idea-to-substack` agent. If the pla
 - `.opencode/command/idea-to-substack.md` - the `/idea-to-substack` command.
 - `.opencode/skills/paper-to-substack/SKILL.md` - style guide and workflow (shared by both pipelines).
 - `.opencode/skills/substack-headline/SKILL.md` - headline framework for post titles (3-question test, 10 formats, A/B testing and SEO-title notes). Used by the outliner (candidate titles) and editor (final title check).
+- `.opencode/skills/substack-notes/SKILL.md` - templates and workflow for drafting and auditing Substack notes (milestone, strategy share, community connection).
+- `.opencode/skills/restorying/SKILL.md` - restorying practice: retells the user's story through literary windows (Austen, Dickens, Dan Brown, custom) as views to reflect on, never drafts to publish. Based on the HWAMW paper's method.

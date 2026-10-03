@@ -1,6 +1,6 @@
 ---
 name: substack-notes
-description: Use when the user wants to draft Substack notes (short posts in the Notes feed) or generate note ideas, using three proven viral note templates: milestone + gratitude, strategy share, community connection. Also use to audit a set of past notes and extract what works. Triggers on "write a substack note", "substack notes", "note idea", "draft a note for substack", "audit my notes", "viral notes".
+description: Use when the user wants to draft Substack notes (short posts in the Notes feed) or generate note ideas, using three proven viral note templates (milestone + gratitude, strategy share, community connection). Also use to audit a set of past notes and extract what works. Triggers on "write a substack note", "substack notes", "note idea", "draft a note for substack", "audit my notes", "viral notes".
 ---
 
 # substack-notes
