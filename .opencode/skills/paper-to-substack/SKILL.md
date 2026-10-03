@@ -112,6 +112,17 @@ date: YYYY-MM-DD
 
 - Gloss every technical term on first use, including terms that feel common (model, dataset, training, inference, API, commit). Assume curiosity, not background.
 - Format: "term (plain-language gloss)" or "term: plain-language gloss".
+- **A plain word beats a gloss.** Where everyday language carries the meaning, drop the term entirely: "people" not "agents", "steadily" not "monotonically", "hidden costs" not "externalities", "more than is good for everyone" not "over-adopting relative to the social optimum". Keep a famous proper name (Herfindahl-Hirschman index) only to name it once, then gloss it in the same sentence.
+
+## Plain language
+
+The reader has no statistics or economics background. Translate, do not transliterate.
+
+- **No stats vocabulary without an immediate gloss, and usually not even then.** "Bayesian", "comparative statics", "convexity", "aggregate leverage" become plain cause-and-effect ("turn this dial up, and this happens").
+- **No feeling-word labels on findings.** Never introduce a result as "the bleakest", "the uncomfortable one", "sobering", "unsettling", or "stark". State the claim plainly and let it land; the finding does the work, not the adjective.
+- **No metaphor chains.** One metaphor per concept, cashed out in plain words within the same paragraph. A metaphor the reader must decode ("the mortgage ladder runs downhill by itself") should be reduced or removed.
+- **Rhythm:** a long build-up followed by a short punch. Fragments are fine for emphasis. Uniform sentence length reads as generated.
+- **Honesty sections in plain English too.** "This is a model, not a measurement" passages use everyday words: "it runs no experiments of its own", not "no new empirical data"; "made-up numbers, picked to illustrate", not "hand-picked illustrative parameters".
 
 ## Analogies
 
@@ -198,7 +209,10 @@ Before the orchestrator writes the final file, confirm:
 - [ ] Hook is 2-3 sentences, no rhetorical question.
 - [ ] Source paper's full title and lead author are named in the intro (paper-to-substack pipeline only).
 - [ ] Every section heading promises value (no label topics).
-- [ ] Every jargon term is glossed on first use.
+- [ ] Every jargon term is glossed on first use, and paper vocabulary is translated to plain words where possible.
+- [ ] No feeling-word labels on findings ("bleakest", "uncomfortable", "sobering").
+- [ ] No metaphor chains; every metaphor is cashed out in plain words in the same paragraph.
+- [ ] Honesty/caveat sections are written in plain English.
 - [ ] No equations, derivations, or formal notation (practitioner numbers OK).
 - [ ] Closing line points to the source paper for derivations.
 - [ ] Pull quotes are verbatim and attributed.

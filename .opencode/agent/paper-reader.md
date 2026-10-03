@@ -41,7 +41,7 @@ Bulleted list of limitations the authors acknowledge AND limitations you observe
 Verbatim quotes from the paper that are striking, important, or useful for the article. Include the section name or page number where each appears. 3-6 quotes max.
 
 ## Technical terms to explain
-Bulleted list of jargon that a general audience will not know. For each term, provide a 1-sentence plain-language gloss.
+Bulleted list of jargon that a general audience will not know. For each term, provide a 1-sentence plain-language gloss. The gloss itself must be in everyday words: no statistics, economics, or CS jargon inside the gloss. If a plain everyday equivalent exists, offer it ("people" for "agents", "hidden costs" for "externalities"), since downstream agents will prefer the plain word over the term.
 
 ## Mathematical results and what they mean
 For each key equation, theorem, or formal result in the paper: state the formal result (for accuracy and downstream fact-checking) AND a plain-language sentence on what it implies for a tech-interested reader without a technical background. Pair them. The plain-language sentence is what downstream agents will use; the formal result is there so the writer and editor can verify they haven't distorted the meaning.
