@@ -118,11 +118,20 @@ date: YYYY-MM-DD
 
 The reader has no statistics or economics background. Translate, do not transliterate.
 
+- **Compressed slogan phrasing is a default to avoid, not a hard rule.** Constructions like "Same duties, none of the staff" or "Different problem, same result" are fine in small doses when the implied comparison is genuinely clear, but they are overused. Default to spelling it out in a full sentence ("The act hands the same obligations to a hobbyist's BBS that it hands to Fortnite"); if you use the compressed form, use it at most once per article, and only where the full version would be longer than the point deserves.
+
 - **No stats vocabulary without an immediate gloss, and usually not even then.** "Bayesian", "comparative statics", "convexity", "aggregate leverage" become plain cause-and-effect ("turn this dial up, and this happens").
 - **No feeling-word labels on findings.** Never introduce a result as "the bleakest", "the uncomfortable one", "sobering", "unsettling", or "stark". State the claim plainly and let it land; the finding does the work, not the adjective.
 - **No metaphor chains.** One metaphor per concept, cashed out in plain words within the same paragraph. A metaphor the reader must decode ("the mortgage ladder runs downhill by itself") should be reduced or removed.
 - **Rhythm:** a long build-up followed by a short punch. Fragments are fine for emphasis. Uniform sentence length reads as generated.
 - **Honesty sections in plain English too.** "This is a model, not a measurement" passages use everyday words: "it runs no experiments of its own", not "no new empirical data"; "made-up numbers, picked to illustrate", not "hand-picked illustrative parameters".
+
+## Say what actually happened
+
+- Describe events with the verb that matches what happened. A proposal is "published" or "adopted"; it does not "land". A law is not "quietly released"; it is "released without a press release". A result is "announced", a report is "released", a bill is "introduced" or "filed".
+- Things that don't have wings rarely land. Things that don't make noise are rarely quiet. When in doubt, name the action: published, announced, adopted, proposed, released, filed, signed.
+- Do not use physical-event metaphors for document events: "landed", "dropped", "slipped out", "quietly", "hit the wires".
+- The same rule applies to mental acts: you do not "hold on to a detail" or "sit with an idea". Say what the reader does: "notice this", "keep this in mind", "consider".
 
 ## Analogies
 
@@ -156,7 +165,8 @@ The reader is tech-interested, not a researcher. They want to know what the math
 
 ## Forbidden phrases
 
-- "delve", "tapestry", "navigate the landscape", "quietly"
+- "delve", "tapestry", "navigate the landscape", "quietly" (and metaphorical "quiet": "does quiet work", "a quiet sentence")
+- "landed" (or "dropped", "slipped out") for events: say what happened instead (published, adopted, announced)
 - "in today's world", "it's worth noting"
 - "At the end of the day"
 - "Let's dive in"
@@ -216,7 +226,7 @@ Before the orchestrator writes the final file, confirm:
 - [ ] No equations, derivations, or formal notation (practitioner numbers OK).
 - [ ] Closing line points to the source paper for derivations.
 - [ ] Pull quotes are verbatim and attributed.
-- [ ] No banned phrases remain.
+- [ ] No banned phrases remain (including "landed"/"quietly" for events; events state what actually happened).
 - [ ] No em dashes in prose (only the pull-quote attribution em dash is allowed).
 - [ ] No fabricated numbers, quotes, or findings.
 - [ ] Word count is 1200-2500.
